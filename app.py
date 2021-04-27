@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route("/webhook", methods=['GET','POST'])
 def webhook():
     if request.method == "GET":
-        VERIFY_TOKEN = "BBQHungAALL156___54ds5a6dsa"
+        VERIFY_TOKEN = "hahachatro"
         print(request)
         mode = request.args.get('hub.mode')
         sendToken = request.args.get('hub.verify_token')
@@ -26,7 +26,13 @@ def webhook():
                     sender = message['sender']['id']
                     if "message" in message:
                         text = message['message']['text']
-                        result = send_fb_message(sender, text)
+                        returnText = ""
+                        if "喵" in text:
+                            returnText = "你沒有貓這麼可愛"
+
+                        else:
+                            returnText = "喵"
+                        result = send_fb_message(sender, returnText)
                 print("Good2")
         except Exception as e:
             print(str(e))
@@ -44,7 +50,7 @@ def send_fb_message(to, message):
 
 @app.route("/", methods=['GET'])
 def index():
-    return "hello word"
+    return "已經成功開啟APP!!!!"
 
 # @handler.add(MessageEvent, message=TextMessage)
 # def handle_message(event):
