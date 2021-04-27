@@ -26,7 +26,13 @@ def webhook():
                     sender = message['sender']['id']
                     if "message" in message:
                         text = message['message']['text']
-                        result = send_fb_message(sender, text)
+                        returnText = ""
+                        if "喵" in text:
+                            returnText = "你沒有貓這麼可愛"
+
+                        else:
+                            returnText = "喵"
+                        result = send_fb_message(sender, returnText)
                 print("Good2")
         except Exception as e:
             print(str(e))
